@@ -1,18 +1,18 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: hello-world
 spec:
-  type: NodePort
   ports:
-    - name: http
-      port: 80
-      targetPort: 8080
+  - name: http
+    port: 80
+    targetPort: 8080
   selector:
     app: hello-world
+  type: NodePort
 ---
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: hello-world
 spec:
@@ -26,5 +26,5 @@ spec:
         app: hello-world
     spec:
       containers:
-      - name: hello-world
-        image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:c74446b7fb3b229e85813cf5c0b609f2ea3a537f
+      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:d06752058458adb1953c4d2312359d4f5f0870d6
+        name: hello-world
