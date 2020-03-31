@@ -26,7 +26,7 @@ spec:
         app: hello-world
     spec:
       containers:
-      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:1082b1edd781183d402d3a36d6e4bea3718d33c2
+      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:0f69841c641720818d0ecf31817bf6cbcb1f0837
         name: hello-world
       imagePullSecrets:
       - name: regcred
