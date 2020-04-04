@@ -9,7 +9,6 @@ spec:
     targetPort: 8080
   selector:
     app: hello-world
-  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -26,7 +25,26 @@ spec:
         app: hello-world
     spec:
       containers:
-      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:6a575b19879fd4beb55896cde642b81a1fd15a99
+      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:31972e488b242bb223518bb8bd6470bdb13def6b
         name: hello-world
       imagePullSecrets:
-      - name: regcred
+      - name: gh-pkg-reg
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: nginx-ingress
+spec:
+  chart:
+    name: nginx-ingress
+    repository: https://kubernetes-charts.storage.googleapis.com
+    version: 1.34.3
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hello-world
+spec:
+  backend:
+    serviceName: hello-world
+    servicePort: 80
