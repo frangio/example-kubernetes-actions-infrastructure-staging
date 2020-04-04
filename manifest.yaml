@@ -25,10 +25,35 @@ spec:
         app: hello-world
     spec:
       containers:
-      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:ee1f749ed4d5deb109bf999d6c51a7167da246d8
+      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:2d191684ea6831e6869673858116b086fa648b41
         name: hello-world
       imagePullSecrets:
       - name: gh-pkg-reg
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+  spec:
+    acme:
+      email: frangio.1@gmail.com
+      privateKeySecretRef:
+        name: letsencrypt-staging
+        solvers:
+        - http01: null
+          ingress:
+            class: nginx
+      server: https://acme-staging-v02.api.letsencrypt.org/directory
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: cert-manager
+spec:
+  chart:
+    name: cert-manager
+    repository: https://charts.jetstack.io
+    version: 0.14.1
 ---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
