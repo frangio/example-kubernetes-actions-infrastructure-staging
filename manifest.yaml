@@ -1,4 +1,9 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: hello-world
@@ -25,7 +30,7 @@ spec:
         app: hello-world
     spec:
       containers:
-      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:5b76f099cca164f98974bfe65ee0e7a636de7d94
+      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:7ba8b19119a661562d6915ff4ad3061910457f05
         name: hello-world
       imagePullSecrets:
       - name: gh-pkg-reg
@@ -49,6 +54,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: cert-manager
+  namespace: cert-manager
 spec:
   chart:
     name: cert-manager
