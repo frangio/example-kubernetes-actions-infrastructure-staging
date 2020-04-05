@@ -324,7 +324,7 @@ spec:
         app: hello-world
     spec:
       containers:
-      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:38ea6fbd139253ba4ecd5dae19b13204884c5131
+      - image: docker.pkg.github.com/frangio/example-kubernetes-actions/hello-world:343dcff6ea6aac4787e65981caf169d4771309bf
         name: hello-world
       imagePullSecrets:
       - name: gh-pkg-reg
